@@ -3,7 +3,7 @@ import PlaygroundSupport
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-//: NSThread
+//: NSThread 1
 
 //let thread = Thread {
 //    print(">>>>> start downloading")
@@ -16,6 +16,20 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 //print("Start on \(threadName)")
 //thread.start()
 //print("Done 🎉 ")
+
+//: NSThread 2
+
+class TestThread {
+    @objc func saySomething() {
+        print("Hello")
+    }
+}
+
+let newObject = TestThread()
+let thread = Thread(target: newObject, selector: #selector(TestThread.saySomething), object: nil)
+thread.start()
+
+print("Done 🎉 ")
 
 //: Serial Queue
 
