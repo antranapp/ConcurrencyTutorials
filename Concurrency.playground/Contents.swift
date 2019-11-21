@@ -1,3 +1,4 @@
+import UIKit
 import Foundation
 import PlaygroundSupport
 
@@ -19,17 +20,17 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 //: NSThread 2
 
-class TestThread {
-    @objc func saySomething() {
-        print("Hello")
-    }
-}
-
-let newObject = TestThread()
-let thread = Thread(target: newObject, selector: #selector(TestThread.saySomething), object: nil)
-thread.start()
-
-print("Done 🎉 ")
+//class TestThread {
+//    @objc func saySomething() {
+//        print("Hello")
+//    }
+//}
+//
+//let newObject = TestThread()
+//let thread = Thread(target: newObject, selector: #selector(TestThread.saySomething), object: nil)
+//thread.start()
+//
+//print("Done 🎉 ")
 
 //: Serial Queue
 
@@ -390,3 +391,58 @@ print("Done 🎉 ")
 //performAsyncTaskIntoConcurrentQueue()
 //
 //print("Done 🎉")
+
+//: OperationQueue 1
+
+//var a = [Int](repeating: 0, count: 10)
+//
+//let queue = OperationQueue()
+//
+//let completionOperation = BlockOperation {
+//    print(a)
+//}
+//
+//queue.maxConcurrentOperationCount = 2
+//for i in 0...9 {
+//    let operation = BlockOperation {
+//        a[i] = 1
+//    }
+//    completionOperation.addDependency(operation)
+//    queue.addOperation(operation)
+//}
+//
+//queue.addOperation(completionOperation)
+//
+//print("Done 🎉")
+
+
+//: Using a barrier on a concurrent queue to synchronize writes
+
+//final class Messenger {
+//
+//    private var messages: [String] = []
+//
+//    private var queue = DispatchQueue(label: "messages.queue", attributes: .concurrent)
+//
+//    var lastMessage: String? {
+//        return queue.sync {
+//            messages.last
+//        }
+//    }
+//
+//    func postMessage(_ newMessage: String) {
+//        queue.sync(flags: .barrier) {
+//            messages.append(newMessage)
+//        }
+//    }
+//}
+//
+//let messenger = Messenger()
+//// Executed on Thread #1
+//messenger.postMessage("Hello SwiftLee!")
+//// Executed on Thread #2
+//print(messenger.lastMessage ?? "") // Prints: Hello SwiftLee!
+//
+//print("Done 🎉")
+
+
